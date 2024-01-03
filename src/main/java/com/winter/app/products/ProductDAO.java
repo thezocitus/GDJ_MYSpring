@@ -1,12 +1,23 @@
 package com.winter.app.products;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.winter.app.util.DBConnector;
+
 public class ProductDAO {
+	
+	private ProductDTO pD;
+	
+	public ProductDAO() {
+		this.pD = new ProductDTO();
+	}
 
 	//상품목록
 	//URL METHOD, PRAMITTER
@@ -14,8 +25,17 @@ public class ProductDAO {
 	//method : get
 	//parameter:
 			
-	public List<ProductDTO> getList() {
-	
+	public List<ProductDTO> getList() throws Exception {
+		Connection con = DBConnector.getConnetor();
+		String sql = "INSERT * FROM PRODUCT";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			pD = new ProductDTO();
+			pD
+		}
+		
 		return null;
 	}
 	
