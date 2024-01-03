@@ -25,7 +25,7 @@ public class HomeController {
 
 		
 	//annotation : 설명 + 기능
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/123", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
