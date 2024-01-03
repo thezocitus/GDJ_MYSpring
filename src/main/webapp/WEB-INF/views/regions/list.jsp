@@ -84,6 +84,6 @@
 
 	<a href="add" class="btn btn-outline-primary" role="button">ADD</a>
 
-s
+
 </body>
 </html>
