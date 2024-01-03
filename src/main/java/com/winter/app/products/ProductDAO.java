@@ -49,6 +49,12 @@ public class ProductDAO {
 		return null;				
 	}
 	
+	//디테일
+	//URL: /product/list
+	//method : get
+	//parameter: productNum
+	
+	
 	public int doAdd(ProductDTO productDTO) {
 		
 		return 0;

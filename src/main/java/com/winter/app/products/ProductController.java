@@ -27,6 +27,8 @@ public class ProductController {
 	 
 		List<ProductDTO> ar =this.productDAO.getList();
 		
+		
+		
 	 
 	}
 	

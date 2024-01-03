@@ -20,6 +20,8 @@ public static Connection getConnetor() throws Exception {
 			Class.forName(driver);
 			//2. DB연결 i in a vionet circle is meaning Interface;
 			Connection con = DriverManager.getConnection(url, user, password);
+			System.out.println("연결");
+			
 			
 			return con;		
 	}
