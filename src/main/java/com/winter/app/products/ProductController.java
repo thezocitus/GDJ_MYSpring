@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 @RequestMapping("/product/*")
 public class ProductController {
 
@@ -23,28 +26,28 @@ public class ProductController {
 		//parameter:
 				
 	@RequestMapping(value= "list", method=RequestMethod.GET)
-	public ModelAndView getList(ModelAndView mv) {
-	 
+	public ModelAndView getList(ModelAndView mv) throws Exception {
+		
 		List<ProductDTO> ar =this.productDAO.getList();
 		mv.addObject("list", ar);
-		mv.setViewName("list");
+		mv.setViewName("product/list");
 		
 		return mv;
 	 
 	}
 	
-			
-			
+						
 	//디테일
 	//URL: /product/detail
 	//method : get
 	//parameter: productNum
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public ModelAndView getDetail(ModelAndView mv) {
-		ProductDTO productDTO = new ProductDTO();
-		
-		mv.addObject("dto", productDTO);
-		mv.setViewName("detail");
-		return mv;
+	public String getDetail(Long productNum, Model model) throws Exception {
+		ProductDTO productDTO = new ProductDTO();		
+		productDTO.setProductNum(productNum);		
+		productDTO = productDAO.getDetail(productDTO);
+				
+		model.addAttribute("DTO", productDTO);		
+		return "product/detail";
 	}
 }

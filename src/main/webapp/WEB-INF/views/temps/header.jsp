@@ -27,7 +27,7 @@
 		          </ul>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" href="/regions/list">Region</a>
+		          <a class="nav-link" href="/product/list">product</a>
 		        </li>
 		        <li class="nav-item">
 		          <a class="nav-link" href="/departments/list">Departments</a>
