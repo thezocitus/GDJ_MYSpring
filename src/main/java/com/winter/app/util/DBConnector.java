@@ -9,8 +9,8 @@ public class DBConnector {
 
 public static Connection getConnetor() throws Exception {
 		
-		String user="user01";
-		String password="user01";
+		String user="user02";
+		String password="user02";
 //		String url="3.36.131.0:1521"
 		String url="jdbc:oracle:thin:@3.35.207.180:1521:xe";
 		String driver="oracle.jdbc.driver.OracleDriver";
@@ -20,6 +20,8 @@ public static Connection getConnetor() throws Exception {
 			Class.forName(driver);
 			//2. DB연결 i in a vionet circle is meaning Interface;
 			Connection con = DriverManager.getConnection(url, user, password);
+			System.out.println("연결");
+			
 			
 			return con;		
 	}
