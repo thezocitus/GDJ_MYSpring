@@ -1,12 +1,15 @@
 package com.winter.app.regions;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller 
 @RequestMapping(value = "/regions/*")
@@ -73,13 +76,14 @@ public class RegionController {
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String list(HttpServletRequest request) throws Exception {
+	public ModelAndView list(ModelAndView mv) throws Exception {
 		System.out.println("Regions List");
 		RegionDAO regionDAO = new RegionDAO();
-		List<RegionDTO> ar = regionDAO.getList();
+		List<RegionDTO> ar = regionDAO.getList();//생성된 데이터
 		System.out.println(ar.size());
-		request.setAttribute("list", ar);
-						
-		return "regions/list";
+		
+		mv.addObject("list", ar);//보낼 데이터
+		mv.setViewName("regions/list");
+		return mv; //리턴값
 	}	
 }
