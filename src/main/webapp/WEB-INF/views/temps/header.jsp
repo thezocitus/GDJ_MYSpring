@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
- </head>
-<header>
+	<header>
 		     <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="/">Navbar</a>
@@ -49,35 +40,5 @@
 		    </div>
 		  </div>
 		</nav>
-		
+	
  </header>
-<body>
-	<h1>DETAIL</h1>
-	<table class="table table-dark table-striped-columns">
-		<thead>
-			<tr>		
-				<th>ID</th><th>NAME</th><th>MANAGER_ID</th><th>LOCATION_ID</th>
-			<tr>
-		</thead>
-		<tbody>
-			<c:if test="${not empty dto }">
-			<tr>
-			<td>${dto.department_id}</td>
-			<td>${dto.department_name}</td>
-			<td>${dto.manager_id}</td>
-			<td>&{dto.location_id}</td>			
-			</tr>	
-			</c:if>
-			<c:if test="${empty dto }">
-			<tr>
-			<td>null</td>
-			<td>null</td>
-			<td>null</td>
-			<td>null</td>	
-			</tr>	
-			</c:if>
-			
-		</tbody>
-	</table>
-</body>
-</html>
