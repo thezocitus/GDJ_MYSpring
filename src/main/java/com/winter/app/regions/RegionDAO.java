@@ -9,6 +9,12 @@ import java.util.List;
 
 import com.winter.app.util.DBConnector;
 
+
+
+//@Controller
+//
+
+//@Repository
 public class RegionDAO {
 	
 	
