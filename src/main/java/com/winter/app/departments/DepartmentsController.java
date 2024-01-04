@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,20 +13,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/departments/*")
 public class DepartmentsController {
 	
-	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public String detail(HttpServletRequest request) throws Exception {
-		System.out.println("Departments List");
-		DepartmentDAO departmentDAO = new DepartmentDAO();
-		DepartmentDTO departmentDTO = new DepartmentDTO();		
-		String id = request.getParameter("department_id");
-		
-		departmentDTO.setDepartment_id(Integer.parseInt(id));
-		departmentDTO = departmentDAO.getdetail(departmentDTO);
-		
-		request.setAttribute("dto", departmentDTO);
-		
-		return "departments/detail";
-	}
+	@Autowired
+	 private DepartmentService departmentService;
+	
+//	@RequestMapping(value="detail", method = RequestMethod.GET)
+//	public String detail(HttpServletRequest request) throws Exception {
+//		System.out.println("Departments List");
+//		DepartmentDAO departmentDAO = new DepartmentDAO();
+//		DepartmentDTO departmentDTO = new DepartmentDTO();		
+//		String id = request.getParameter("department_id");
+//		
+//		departmentDTO.setDepartment_id(Integer.parseInt(id));
+//		departmentDTO = departmentDAO.getDetail(departmentDTO);
+//		
+//		request.setAttribute("dto", departmentDTO);
+//		
+//		return "departments/detail";
+//	}
 	
 	
 	@RequestMapping(value="list", method = RequestMethod.GET)

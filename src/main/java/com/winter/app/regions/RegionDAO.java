@@ -72,7 +72,7 @@ public class RegionDAO {
 		
 		public List<RegionDTO> getList() {			
 		
-			return sqlSession.selectList(namespace+"getlist");
+			return sqlSession.selectList(namespace+"getList");
 			
 										
 				
