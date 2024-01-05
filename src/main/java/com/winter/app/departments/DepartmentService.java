@@ -9,5 +9,8 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentDAO departmentDAO;
 	
+	public void add() {
+		//departmentDAO.
+	}
 	
 }

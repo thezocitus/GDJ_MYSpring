@@ -8,18 +8,18 @@
   <mapper namespace="com.winter.app.regions.RegionDAO">
   
   	<!--DELECT -->
- 	<delete id="delete" parameterType="com.winter.app.regions.RegionDTO">
+ 	<delete id="delete" parameterType="RegionDTO">
  		DELETE REGIONS WHERE REGION_ID = #{region_id} 		
  	</delete> 
   
   	<!-- update -->
-  	<update id="update" parameterType="com.winter.app.regions.RegionDTO">
+  	<update id="update" parameterType="RegionDTO">
   		UPDATE REGIONS SET REGION_NAME = #{region_name}
   		WHERE REGION_ID=#{region_id}
   	</update>
   	
   	<!--  add  -->
-  	<insert id="add" parameterType="com.winter.app.regions.RegionDTO">
+  	<insert id="add" parameterType="RegionDTO">
   			INSERT INTO REGIONS 
   			VALUES (#{region_id}, #{region_name})
   	</insert>
@@ -27,13 +27,13 @@
   	<!--  detail -->
   	<!-- id는 DAO의 매서드명으로 작성하시오 -->
   	  	
-  	<select id="getDetail" resultType="com.winter.app.regions.RegionDTO" parameterType="com.winter.app.regions.RegionDTO">
+  	<select id="getDetail" resultType="RegionDTO" parameterType="RegionDTO">
   		SELECT * FROM REGIONS WHERE REGION_ID = #{region_id} <!--  sql 컴럼명과 변수의 이름이 일치하면 땅겨옴 -->
   	</select>
   	
   	
   	<!-- list  -->
-  	<select id="getList" resultType="com.winter.app.regions.RegionDTO">
+  	<select id="getList" resultType="RegionDTO">
   		SELECT * FROM REGIONS
   	</select>
   	

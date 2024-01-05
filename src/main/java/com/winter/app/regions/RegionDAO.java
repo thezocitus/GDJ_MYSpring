@@ -38,13 +38,14 @@ public class RegionDAO {
 			return sqlSession.update(namespace+"update",regionDTO);
 		}
 	
-	
+		//insert
 		public int add(RegionDTO regionDTO) throws Exception {
 			
 			return sqlSession.insert(namespace+"add",regionDTO);
 		}
 	
 		public RegionDTO getDetail(RegionDTO regionDTO) throws Exception {
+			System.out.println("df "+ sqlSession);
 			
 			return sqlSession.selectOne(namespace+"getDetail", regionDTO);
 		}
