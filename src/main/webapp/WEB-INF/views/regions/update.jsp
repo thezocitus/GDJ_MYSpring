@@ -57,7 +57,7 @@
 	 		<form action="update" method="post">
 				  <div class="mb-3">
 				    <label for="regionId" class="form-label">RegionID</label>
-				    <input type="text"  name="region_id" class="form-control" id="regionId" aria-describedby="emailHelp">
+				    <input type="text"  value="${dto.region_id}" name="region_id" class="form-control" id="regionId" aria-describedby="emailHelp">
 				    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 				  </div>
 				  <div class="mb-3">

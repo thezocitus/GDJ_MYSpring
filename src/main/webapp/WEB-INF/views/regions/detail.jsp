@@ -66,7 +66,7 @@
  			<button id="test">test</button>
  			<form id="frm" action="./delete" method="post">
  				<input type="hidden" name="region_id" value="${dto.region_id}"> 
- 			</form>
+ 			</form>C
  			</c:if>
  			<c:if test="${empty dto} ">
  			<h3>없는 번호  입니다.</h3>

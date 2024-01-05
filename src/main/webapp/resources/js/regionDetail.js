@@ -8,9 +8,12 @@
 
 
 up.addEventListener("click", function(){
-    console.log(up.getElementBydata-region-id.value);
 
-    location.href="./update?region_id="+data-region-id;
+    frm.setAttribute("action", "update");
+    frm.setAttribute("method", "GET");
+    frm.submit();
+
+   // location.href="./update?region_id="+data-region-id;
 
 })
 
