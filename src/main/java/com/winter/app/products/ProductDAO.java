@@ -8,10 +8,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winter.app.util.DBConnector;
 
+@Repository
 public class ProductDAO {
 	
 	private ProductDTO pD;
@@ -27,21 +29,8 @@ public class ProductDAO {
 	//parameter:
 			
 	public List<ProductDTO> getList() throws Exception {
-		Connection con = DBConnector.getConnetor();
-		String sql = "SELECT * FROM PRODUCT";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		List<ProductDTO> ar = new ArrayList<ProductDTO>();
 		
-		while(rs.next()) {
-			pD = new ProductDTO();
-			pD.setProductNum(Long.parseLong(rs.getString("productNum")));
-			pD.setProductName(rs.getString("productName"));
-			pD.setProductContents(rs.getString("productContents"));
-			pD.setProductRate(Double.parseDouble(rs.getString("productRate")));
-			pD.setProductJumsu(Double.parseDouble(rs.getString("productJumsu")));
-			ar.add(pD);
-		}
+		
 		
 		return ar;
 	}
