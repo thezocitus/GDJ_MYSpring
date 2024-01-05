@@ -4,7 +4,7 @@ public class DepartmentDTO {
 	
 	private int department_id;
 	private String department_name;
-	private int manager_id;
+	private Integer manager_id;
 	private int location_id;
 	
 	
@@ -24,7 +24,7 @@ public class DepartmentDTO {
 	public int getManager_id() {
 		return manager_id;
 	}
-	public void setManager_id(int manager_id) {
+	public void setManager_id(Integer manager_id) {
 		this.manager_id = manager_id;
 	}
 	public int getLocation_id() {

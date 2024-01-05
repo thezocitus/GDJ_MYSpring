@@ -21,45 +21,23 @@ public class DepartmentDAO {
 	private SqlSession sqlSession;
 	private final String namespace="com.winter.app.departments.DepartmentDAO.";
 	
-//	public int update(DepartmentDTO departmentDTO) throws Exception{
-//		Connection con = DBConnector.getConnetor();
-//		
-//		String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?, MANAGER_ID=?, LOCATION_ID=? WHERE DEPARTMENT_ID=?";
-//		PreparedStatement st = con.prepareStatement(sql);
-//		
-//		st.setString(1, departmentDTO.getDepartment_name());
-//		st.setInt(2, departmentDTO.getManager_id());
-//		st.setInt(3, departmentDTO.getLocation_id());
-//		st.setInt(4, departmentDTO.getDepartment_id());
-//		
-//		int result = st.executeUpdate();
-//		
-//		DBConnector.disConnect(st, con);
-//		
-//		return result;
-//		
-//	}
-//	
-//	
-//	public int add(DepartmentDTO departmentDTO) throws Exception {
-//		Connection con = DBConnector.getConnetor();
-//		
-//		String sql = "INSERT INTO DEPARTMENTS VALUES(?,?,?,?)";
-//		
-//		PreparedStatement st = con.prepareStatement(sql);
-//		
-//		st.setInt(1, departmentDTO.getDepartment_id());
-//		st.setString(2, departmentDTO.getDepartment_name());
-//		st.setInt(3, departmentDTO.getManager_id());
-//		st.setInt(4,departmentDTO.getLocation_id());
-//		
-//		int result = st.executeUpdate();
-//		
-//		DBConnector.disConnect(st, con);
-//		
-//		return result;
-//		
-//	}
+	public int delete(DepartmentDTO departmentDTO) throws Exception{
+		
+		return sqlSession.delete(namespace+"delete",departmentDTO);
+	}
+	
+	public int update(DepartmentDTO departmentDTO) throws Exception{		
+		
+		return sqlSession.update(namespace+"update",departmentDTO);
+		
+	}
+	
+	
+	public int add(DepartmentDTO departmentDTO) throws Exception {		
+		
+		return sqlSession.insert(namespace+"add",departmentDTO);
+		
+	}
 	
 	public DepartmentDTO getDetail(DepartmentDTO departmentDTO) throws Exception {
 			
