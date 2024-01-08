@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.winter.app.MyTest;
 import com.winter.app.regions.RegionDAO;
 import com.winter.app.regions.RegionDTO;
+import com.winter.app.util.Pager;
 
 public class RegionDAOtest extends MyTest{
 	
@@ -17,12 +18,16 @@ public class RegionDAOtest extends MyTest{
 	private RegionDAO regionDAO;
 	
 	
-//	@Test
+	@Test
 	public void getListTest () {
+		Pager pager = new Pager();
+		pager.setPage(1L);
+		pager.makeRow();
+		List<RegionDTO> ar = regionDAO.getList(pager);
+		System.out.println(ar.get(0).getRegion_id());
 		
-		List<RegionDTO> ar = regionDAO.getList();
 		
-		assertNotEquals(0, ar.size());		
+		assertEquals(10, ar.size());		
 		
 	}
 	
@@ -37,17 +42,30 @@ public class RegionDAOtest extends MyTest{
 	}
 	
 //	@Test
-	public void addTest() throws Exception {
-		RegionDTO regionDTO = new RegionDTO();
-	 	regionDTO.setRegion_name("HEAVEN");
-	 	regionDTO.setRegion_id(666);
-	 	int result = regionDAO.add(regionDTO);
-	
-	 	assertEquals(1,result);
-	}
+//	public void addTest() throws Exception {
+//		RegionDTO regionDTO = new RegionDTO();
+//	 	regionDTO.setRegion_name("HEAVEN");
+//	 	regionDTO.setRegion_id(666);
+//	 	int result = regionDAO.add(regionDTO);
+//	
+//	 	assertEquals(1,result);
+//	}
 
+//	@Test
+	public void addTest() throws Exception{
+		RegionDTO regionDTO = new RegionDTO();
+	 	for(int i = 0 ; i < 100 ; i++) {
+	 		regionDTO.setRegion_name("HEAVEN");
+		 	regionDTO.setRegion_id(100+i);
+	 		
+	 		int result = regionDAO.add(regionDTO);
+	 	}
 	
-	@Test
+	 	
+	}
+	
+	
+//	@Test
 	public void updateTest() throws Exception{
 		RegionDTO regionDTO = new RegionDTO();
 	 	regionDTO.setRegion_name("hell");

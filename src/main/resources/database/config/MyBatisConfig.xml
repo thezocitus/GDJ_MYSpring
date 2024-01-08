@@ -7,7 +7,7 @@
   	<typeAliases> <!-- 엘리어스 별칭 -->
   		<typeAlias type="com.winter.app.regions.RegionDTO" alias="RegionDTO"/>
   		<typeAlias type="com.winter.app.departments.DepartmentDTO" alias="DepartmentDTO"/>
-  	
+  		<typeAlias type="com.winter.app.util.Pager"/>
   		
   	</typeAliases>
   </configuration>

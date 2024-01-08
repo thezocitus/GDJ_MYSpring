@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.winter.app.util.Pager;
+
 //DAO 
 @Service
 public class RegionService {
@@ -44,8 +46,10 @@ public class RegionService {
 	
 	
 	//list
-	public List<RegionDTO> getList() throws Exception {
-		List<RegionDTO> ar = this.regionDAO.getList();
+	public List<RegionDTO> getList(Pager pager) throws Exception {
+		
+		pager.makeRow();
+		List<RegionDTO> ar = this.regionDAO.getList(pager);
 	
 		return ar;
 	

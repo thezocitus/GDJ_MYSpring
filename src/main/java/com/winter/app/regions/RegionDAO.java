@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.winter.app.util.DBConnector;
+import com.winter.app.util.Pager;
+
+
 
 
 
@@ -52,9 +54,11 @@ public class RegionDAO {
 
 		
 		
-		public List<RegionDTO> getList() {			
-		
-			return sqlSession.selectList(namespace+"getList");
+		public List<RegionDTO> getList(Pager pager) {		
+			
+			
+						
+			return sqlSession.selectList(namespace+"getList", pager);
 			
 										
 				

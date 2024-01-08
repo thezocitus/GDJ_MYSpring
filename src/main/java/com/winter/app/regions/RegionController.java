@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.winter.app.util.Pager;
+
 import oracle.net.aso.m;
 
 @Controller 
@@ -118,10 +120,11 @@ public class RegionController {
 	}
 //	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView mv) throws Exception {
+	public ModelAndView list(Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		System.out.println("Regions List");
 //		RegionDAO regionDAO = new RegionDAO();
-		List<RegionDTO> ar = regionService.getList();//생성된 데이터
+		List<RegionDTO> ar = regionService.getList(pager);//생성된 데이터
 		System.out.println(ar.size());
 		
 		mv.addObject("list", ar);//보낼 데이터
