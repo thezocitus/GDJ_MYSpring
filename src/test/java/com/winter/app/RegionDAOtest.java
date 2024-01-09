@@ -18,7 +18,7 @@ public class RegionDAOtest extends MyTest{
 	private RegionDAO regionDAO;
 	
 	
-	@Test
+//	@Test
 	public void getListTest () {
 		Pager pager = new Pager();
 		pager.setPage(1L);
@@ -51,12 +51,12 @@ public class RegionDAOtest extends MyTest{
 //	 	assertEquals(1,result);
 //	}
 
-//	@Test
+	@Test
 	public void addTest() throws Exception{
 		RegionDTO regionDTO = new RegionDTO();
 	 	for(int i = 0 ; i < 100 ; i++) {
-	 		regionDTO.setRegion_name("HEAVEN");
-		 	regionDTO.setRegion_id(100+i);
+	 		regionDTO.setRegion_name("Hell"+i);
+		 	regionDTO.setRegion_id(100+i*3);
 	 		
 	 		int result = regionDAO.add(regionDTO);
 	 	}

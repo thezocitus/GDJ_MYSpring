@@ -125,9 +125,9 @@ public class RegionController {
 		System.out.println("Regions List");
 //		RegionDAO regionDAO = new RegionDAO();
 		List<RegionDTO> ar = regionService.getList(pager);//생성된 데이터
-		System.out.println(ar.size());
 		
 		mv.addObject("list", ar);//보낼 데이터
+		mv.addObject("pager", pager);
 		mv.setViewName("regions/list");
 		return mv; //리턴값
 	}	

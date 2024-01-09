@@ -61,6 +61,28 @@
 <h1>
 	Region List  
 </h1>
+
+	<DIV>
+		<form class="row g-3">
+			<div class="col-auto">
+				<select name="kind" class="form-select" aria-label="Default select example">				  
+				  <option value="kind1">Title</option>
+				  <option value="kind2">Contents</option>
+				  <option value="kind3">Writer</option>
+				  <option value="kind4">ALL</option>
+				</select>
+			</div>		
+						 
+			  <div class="col-auto">
+			    <label for="search" class="visually-hidden">search</label>
+			    <input type="text" class="form-control" id="search" name="search"> <!-- name 이 파라미터 키값, -->
+			  </div>
+			  <div class="col-auto">
+			    <button type="submit" class="btn btn-primary mb-3">검색</button>
+			  </div>
+		</form>
+	</DIV>
+	
 	<table class="table table-warning">
 		<thead>
 			<tr>
@@ -69,7 +91,7 @@
 		</thead>
 		<tbody>
 		<!-- for( i=0 ; i< ; i++) -->
-		<!-- for(타입명 변수명 : 배열명) -->
+		<!-- for(íìëª ë³ìëª : ë°°ì´ëª) -->
 			<c:forEach items="${requestScope.list}" var="dto">
 				<tr>
 					<td>${pageScope.dto.region_id}</td>
@@ -81,7 +103,35 @@
 		<tfoot>
 		</tfoot>
 	</table>
-
+	
+	<div>
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination">
+			    <c:if test="${!pager.start}">
+				    <li class="page-item">
+				      <a class="page-link" href="./list?page=${pager.startNum-1}" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+			    </c:if>
+			   
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			    <li class="page-item"><a class="page-link" href="./list?page=${i}&search=${pager.search}">${i}</a></li>			    
+			    </c:forEach>
+			    
+			    <c:if test="${!pager.last}">
+					<li>
+				      <a class="page-link" href="./list?page=${pager.lastNum+1}" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+			    </c:if>
+			  </ul>
+			</nav>
+	
+	
+	</div>
+	
 	<a href="add" class="btn btn-outline-primary" role="button">ADD</a>
 
 
