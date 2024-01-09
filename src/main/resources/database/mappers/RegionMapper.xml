@@ -39,8 +39,7 @@
 
  		 <if test="kind=='kind3' or kind==kind4">
   		 OR WRITER LIKE '%'||#{search}||'%'
- 		 </if>
- 		 		 
+ 		 </if> 		 		 
  		 </where>
  		 
 		 		 
