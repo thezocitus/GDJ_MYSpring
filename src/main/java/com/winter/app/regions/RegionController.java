@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.winter.app.util.Pager;
@@ -74,8 +75,11 @@ public class RegionController {
 	}
 		
 	
-	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(RegionDTO regionDTO, Model model) throws Exception{
+	
+	
+	
+	
+	
 //		String id = request.getParameter("region_id");
 //		String name = request.getParameter("region_name");
 //		
@@ -83,8 +87,11 @@ public class RegionController {
 //		regionDTO.setRegion_id(Integer.parseInt(id));
 //		regionDTO.setRegion_name(name);
 //		RegionDTO regionDTO = new RegionDTO();
+	
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(RegionDTO regionDTO, Model model, MultipartFile photo) throws Exception{
+		int result = this.regionService.add(regionDTO, photo);
 		
-		int result = this.regionService.add(regionDTO);
 		
 		String msg="등록 실패"; 
 		if(result>0) {

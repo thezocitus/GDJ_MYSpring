@@ -62,8 +62,17 @@
   		WHERE REGION_ID=#{region_id}
   	</update>
   	
+  	<insert id="addFile" parameterType="RegionFileDTO">  		
+  		INSERT INTO REGIONFILE 
+		VALUES (FILE_SEQ.NEXTVAL,#{fileName},#{origName},#{region_id})
+  	</insert>
+  	
+  	
   	<!--  add  -->
   	<insert id="add" parameterType="RegionDTO">
+  			<selectKey keyProperty="region_id"  order="BEFORE"  resultType="Long">
+  				SELECT EMPLOYEES_SEQ.NEXTVAL FROM DUAL
+  			</selectKey>
   			INSERT INTO REGIONS 
   			VALUES (#{region_id}, #{region_name})
   	</insert>
@@ -91,7 +100,7 @@
   	</select>
   	
   	<!-- getTotal  -->
-  	<select id="getTotal" resultType="long" parameterType="Pager">
+  	<select id="getTotal" resultType="Long" parameterType="Pager">
   	
   		SELECT COUNT(REGION_ID) FROM REGIONS
   		<include refid="search" />
