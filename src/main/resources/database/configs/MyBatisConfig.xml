@@ -8,9 +8,10 @@
   		<typeAlias type="com.winter.app.regions.RegionDTO" alias="RegionDTO"/>
   		<typeAlias type="com.winter.app.departments.DepartmentDTO" alias="DepartmentDTO"/>
   		<typeAlias type="com.winter.app.regions.RegionFileDTO" alias="RegionFileDTO"/>
+  		
   		<typeAlias type="com.winter.app.util.Pager" alias="Pager"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
-  		
+  		<typeAlias type="java.util.List" alias="List"/>
   		
   	</typeAliases>
   </configuration>

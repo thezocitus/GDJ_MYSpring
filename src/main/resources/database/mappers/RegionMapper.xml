@@ -56,6 +56,11 @@
  		DELETE REGIONS WHERE REGION_ID = #{region_id} 		
  	</delete> 
   
+  
+  
+  
+  
+  
   	<!-- update -->
   	<update id="update" parameterType="RegionDTO">
   		UPDATE REGIONS SET REGION_NAME = #{region_name}
@@ -80,10 +85,46 @@
   	<!--  detail -->
   	<!-- id는 DAO의 매서드명으로 작성하시오 -->
   	  	
-  	<select id="getDetail" resultType="RegionDTO" parameterType="RegionDTO">
-  		SELECT * FROM REGIONS WHERE REGION_ID = #{region_id} <!--  sql 컴럼명과 변수의 이름이 일치하면 땅겨옴 -->
+  	<select id="getDetail" resultMap="getDetailRseult" parameterType="RegionDTO">
+  		<!-- SELECT * FROM REGIONS WHERE REGION_ID = #{region_id} --> <!--  sql 컴럼명과 변수의 이름이 일치하면 땅겨옴 -->
+ 		SELECT * 
+		FROM REGIONS
+			LEFT JOIN
+			REGIONFILE
+			USING (REGION_ID)
+		WHERE REGION_ID = #{region_id}
+	  
   	</select>
   	
+  	<resultMap type="RegionDTO" id="getDetailRseult"> <!-- 타입은 내가 원하는 타입.  -->
+  		<!-- PK  -->
+  		<id column="REGION_ID" property="region_id"/>
+  		<!-- PK를 제외한 나머지 -->
+  		<result column="REGION_NAME" property="region_name"/>
+  	
+  		<!-- 1:1  filedto-->
+  	
+  <!-- 		<association property="regionFileDTO" javaType="RegionFileDTO">
+  			PK
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName" />
+  			<result column="origName" property="origName" />
+  		</association> -->
+  		
+  		<!-- 1:N -->
+		<collection property="regionFileDTOs"  javaType="List" ofType="RegionFileDTO">
+			<!-- PK -->
+			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName" />
+  			<result column="origName" property="origName" />
+		
+		</collection>  		
+  	
+  	
+  	
+  	
+  		
+  	</resultMap>
   	
   	<!-- list  -->
   	<select id="getList" resultType="RegionDTO" parameterType="Pager">
@@ -97,6 +138,14 @@
 					) RG
 			)
 			WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	
+  <!-- getListFiles -->
+  	<select id="getListFiles" resultType="RegionFileDTO" parameterType="RegionDTO">
+
+  		SELECT * FROM REGIONFILE WHERE REGION_ID=#{region_id}
+
   	</select>
   	
   	<!-- getTotal  -->

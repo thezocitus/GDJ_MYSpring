@@ -1,0 +1,57 @@
+
+파일 메니저 만들기
+
+service 에 
+
+
+2024 01 11
+
+
+파일 만들기 전용 클래스 만들기,
+
+
+annotation 입력	controller 
+
+
+
+FileManager -> file save 
+
+
+파일 업로드 생성 (여러 개),
+
+오라클 서버에서 테이블 join으로 활용
+
+
+
+
+
+
+//1. 어디에 저장할 것 인가??
+			String path = servletContext.getRealPath( "/resources/upload");
+			
+			System.out.println(path);			
+		
+			File f = new File(path, "regions");
+			
+			
+			
+			if(!f.exists()) {
+				f.mkdirs();
+			}
+		//2. 저장할 파일명으로 저장할 것인가??
+			//a.시간 이용
+			Calendar ca = Calendar.getInstance();
+			String fileName=ca.getTimeInMillis()+"_"+file.getOriginalFilename();
+			System.out.println(fileName);
+			//b. UUID
+			fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
+			System.out.println(fileName);
+			
+		//3. 파일을 저장
+			// a.FileCopyUtils 클래스 이용
+			f=new File(f, fileName);
+			FileCopyUtils.copy(file.getBytes(), f);
+									
+									
+파일 추가부분 파일 메니저로<-- 메서드 선언
+

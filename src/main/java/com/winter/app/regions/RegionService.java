@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
+import com.winter.app.util.FileManager;
 import com.winter.app.util.Pager;
 
 //DAO 
@@ -23,6 +26,9 @@ public class RegionService {
 	@Autowired
 	private RegionDAO regionDAO;
 	
+	@Autowired // ioc dependency injettion annotaion;
+	private FileManager fileManager;
+	
 	@Autowired
 	//내장 객체 중 application
 	private ServletContext servletContext;
@@ -30,9 +36,25 @@ public class RegionService {
 	
 	//delete
 	
-	public int delete(RegionDTO regionDTO ) {
+	public int delete(RegionDTO regionDTO ) throws Exception {
+		//1. 삭제 할 파일명 조회		
+		List<RegionFileDTO> ar = regionDAO.getListFiles(regionDTO);
 		
-		return regionDAO.delete(regionDTO);
+		//DB에서 삭제
+		int result = regionDAO.delete(regionDTO);
+		
+		//경로 생성
+		
+		String path = servletContext.getRealPath("/resources/upload/regions");
+		for(RegionFileDTO f : ar) {			
+			f.getFileName();
+			fileManager.fileDelete(path, f.getFileName());
+		}
+		
+		
+		//HDD에서 삭제
+		
+		return result;
 	}
 	
 	//update
@@ -43,41 +65,31 @@ public class RegionService {
 	
 	
 	//insert
-	public int add(RegionDTO regionDTO, MultipartFile file) throws Exception {
+	public int add(RegionDTO regionDTO, MultipartFile [] file) throws Exception {
 			
 			int result = regionDAO.add(regionDTO);
+			
+			
 		//1. 어디에 저장할 것 인가??
-			String path = servletContext.getRealPath( "/resources/upload");
+			String path = servletContext.getRealPath( "/resources/upload/regions");
 			
 			System.out.println(path);			
 		
-			File f = new File(path, "regions");
-			
-			
-			
-			if(!f.exists()) {
-				f.mkdirs();
+			for(MultipartFile f : file) {				
+				
+				if(f.isEmpty()){
+					continue;
+				}
+				
+				String fileName = fileManager.fileSave(path, f);
+				
+				//4. DB에 정보 저장
+				RegionFileDTO dto = new RegionFileDTO();
+				dto.setFileName(fileName);
+				dto.setOrigName(f.getOriginalFilename());
+				dto.setRegion_id(regionDTO.getRegion_id());
+				result = regionDAO.addFile(dto);
 			}
-		//2. 저장할 파일명으로 저장할 것인가??
-			//a.시간 이용
-			Calendar ca = Calendar.getInstance();
-			String fileName=ca.getTimeInMillis()+"_"+file.getOriginalFilename();
-			System.out.println(fileName);
-			//b. UUID
-			fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
-			System.out.println(fileName);
-			
-		//3. 파일을 저장
-			// a.FileCopyUtils 클래스 이용
-			f=new File(f, fileName);
-			FileCopyUtils.copy(file.getBytes(), f);
-									
-		//4. DB에 정보 저장
-			RegionFileDTO dto = new RegionFileDTO();
-			dto.setFileName(fileName);
-			dto.setOrigName(file.getOriginalFilename());
-			dto.setRegion_id(regionDTO.getRegion_id());
-			result = regionDAO.addFile(dto);
 			return  result;
 			/* regionDAO.add(regionDTO); */
 	}
@@ -100,61 +112,15 @@ public class RegionService {
 		Long totalCount = regionDAO.getTotal(pager);
 		System.out.println(totalCount);
 		
-		pager.makeNum(totalCount);
+		pager.makeNum(totalCount);				
 				
-		/////////////////////////////////////////////////////
-		//페이지 계산 코드
-		//1.총 페이지의 수
-//		
-//		Long totalPage=0L;
-//		
-//		totalPage = totalCount/pager.getPerPage();
-//		if(totalCount%pager.getPerPage() > 0) {
-//			totalPage++;
-//		}		
-//		
-//		pager.setTotalPage(totalPage);
-//		
-//		//3.총 블럭의 수
-//		Long perBlock=5L;
-//		Long totalBlock=0L;
-//		
-//		totalBlock = totalPage/perBlock;
-//		if(totalPage%perBlock !=0) {
-//			totalBlock++;
-//		}
-//		
-//		//3. page의 값으로 현제의 블럭 번호 찾기 
-//		Long curBlock=0L;
-//		
-//		curBlock=pager.getPage()/perBlock;
-//		 
-//		if(pager.getPage()%perBlock !=0) {
-//			curBlock++;
-//		}
-//		//4. 현제 블럭번호로 시작번호와 끝 번호 구하기
-//		Long startNum=0L;
-//		Long lastNum= curBlock*perBlock;;		
-//		startNum = lastNum-perBlock+1;
-//		
-//		pager.setLastNum(lastNum);
-//		pager.setStartNum(startNum);
-//		
-//		//이전, 다음 블럭 유뮤 체크
-//		if(curBlock==1) {
-//			pager.setStart(true);
-//		}
-//		
-//		if(curBlock==totalBlock) {
-//			pager.setLastNum(totalPage);
-//			pager.setLast(true);
-//		}
 		
-		//////////////////////////////////////////////////////////
 		
 		List<RegionDTO> ar = this.regionDAO.getList(pager);
 		System.out.println("check");
 		return ar;	
 	
 	}
+	
+	
 }

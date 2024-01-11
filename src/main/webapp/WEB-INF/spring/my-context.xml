@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<context:property-placeholder location="classpath:database/configs/database.properties"/>
 
-	
-	<!-- DB에 로그인 후 연결 -->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
-		<property name="username" value="user01"></property>
-		<property name="password" value="user01"></property>
-		<property name="url" value="jdbc:oracle:thin:@43.201.148.217:1521:xe"></property>
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="username" value="${oracle.username}"></property>
+		<property name="password" value="${oracle.password}"></property>
+		<property name="url" value="${oracle.url}"></property>
+		<property name="driverClassName" value="${oracle.driver}"></property>
 						
 	</bean>
 	
-	<!-- Connection, Sql문이 있는 xml파일의 위치, 채ㅜ럏 파일의 위치를 알려줌 -->
+	<!--  -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:database/config/MyBatisConfig.xml"></property>		
+		<property name="dataSource" ref="dataSource"></property>		
+		<property name="configLocation" value="classpath:database/configs/MyBatisConfig.xml"></property>
 		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
 	</bean>
 
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
+
 </beans>

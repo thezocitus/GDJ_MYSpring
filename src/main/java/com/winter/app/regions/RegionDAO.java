@@ -70,9 +70,15 @@ public class RegionDAO {
 //			sqlSession.selectList(namespace+"getList", pager).forEach(o -> System.out.println(o));
 //						
 			return sqlSession.selectList(namespace+"getList", pager);
+		
+		}
+		
+		public List<RegionFileDTO> getListFiles(RegionDTO RegionDTO) throws Exception{
 			
+			return sqlSession.selectList(namespace+"getListFiles",RegionDTO);
+			
+		}
 										
 				
-	}
 	
 }

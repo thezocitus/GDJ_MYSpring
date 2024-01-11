@@ -59,7 +59,7 @@ public class RegionController {
 	
 	
 	@RequestMapping(value = "delete", method=RequestMethod.POST)
-	public String delete(RegionDTO regionDTO, Model model) {
+	public String delete(RegionDTO regionDTO, Model model) throws Exception {
 		int result = this.regionService.delete(regionDTO);
 		
 		String msg="삭제 실패";
@@ -89,7 +89,7 @@ public class RegionController {
 //		RegionDTO regionDTO = new RegionDTO();
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(RegionDTO regionDTO, Model model, MultipartFile photo) throws Exception{
+	public String add(RegionDTO regionDTO, Model model, MultipartFile [] photo) throws Exception{
 		int result = this.regionService.add(regionDTO, photo);
 		
 		
@@ -120,6 +120,8 @@ public class RegionController {
 	public String detail(RegionDTO regionDTO, Model model) throws Exception {
 		
 		regionDTO = this.regionService.getDetail(regionDTO);
+		
+//		regionDTO.setRegion_id(null);
 		
 		model.addAttribute("dto",regionDTO);
 		

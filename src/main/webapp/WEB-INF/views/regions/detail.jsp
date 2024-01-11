@@ -56,6 +56,13 @@
  			<c:if test="${dto != null }">
  			<h3>${dto.region_id}</h3>
  			<div>${dto.region_name}</div>
+ 			<div>
+ 				<h2>FILE</h2>
+ 				<c:forEach items="${dto.regionFileDTOs}" var="f">
+ 				<a href="/resources/upload/regions/${f.fileName}">${f.origName}</a>
+ 				</c:forEach>
+ 			</div>
+ 			
 			<a href="">Update</a>
 			
 			<!-- regions/update get:form -->
@@ -66,7 +73,7 @@
  			<button id="test">test</button>
  			<form id="frm" action="./delete" method="post">
  				<input type="hidden" name="region_id" value="${dto.region_id}"> 
- 			</form>C
+ 			</form>
  			</c:if>
  			<c:if test="${empty dto} ">
  			<h3>없는 번호  입니다.</h3>

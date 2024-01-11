@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>INDEX</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+   	<c:import url="./temps/bootStrap_css.jsp"></c:import>
+    
  </head>
 <header>
 		     <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
@@ -59,10 +61,10 @@
 			 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
-			      <img src="/resources/img/J1.jpeg" class="d-block w-100" alt="...">
+			      <img src="/resources/img/f1.png" class="d-block w-100" alt="...">
 			    </div>
 			    <div class="carousel-item">
-			      <img src="/resources/img/J2.jpg" class="d-block w-100" alt="...">
+			      <img src="/resources/img/f2.jpeg" class="d-block w-100" alt="...">
 			    </div>
 			    <div class="carousel-item">
 			      <img src="/resources/img/j3.png" class="d-block w-100" alt="...">
